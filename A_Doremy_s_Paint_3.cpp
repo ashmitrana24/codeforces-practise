@@ -5,7 +5,6 @@ using vi = vector<int>;
 using vll = vector<long long>;
 
 void solve() {
-
     int n; cin>>n;
     vi a(n);
     for(int i=0;i<n;i++) cin>>a[i];

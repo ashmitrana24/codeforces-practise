@@ -18,6 +18,16 @@ void solve() {
     }
 
     int op=0;
+    while(n<=100){
+        if(x.find(s) != string::npos){
+            cout<<op<<endl;
+            return;
+        }
+        x+=x;
+        n*=2;
+        op++;
+    }
+    cout<<-1<<endl;
 }
 
 int main() {
