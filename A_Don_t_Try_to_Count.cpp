@@ -11,12 +11,10 @@ void solve() {
     cin>>x;
     string s;
     cin>>s;
-
     if(s==x){
         cout<<0<<endl;
         return;
     }
-
     int op=0;
     while(n<=100){
         if(x.find(s) != string::npos){
