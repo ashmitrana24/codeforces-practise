@@ -52,15 +52,16 @@ void solve(){
     int n;cin>>n;
     vi a(n);
     for(int i=0;i<n;i++) cin>>a[i];
-    int t_x=0;
-    for(int i=0;i<n;i++) t_x^=a[i];
-    if(n%2==0){
-        if(t_x==0) cout<<t_x<<endl;
-        else cout<<-1<<endl;
+    int flag=1;
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            if(gcd(a[i],a[j])<=2){
+                flag=0;
+            }
+        }
     }
-    else{
-        cout<<t_x<<endl;
-    }
+    if(flag==0) cout<<"Yes"<<endl;
+    else cout<<"No"<<endl;
 }
 
 /* Main()  function */

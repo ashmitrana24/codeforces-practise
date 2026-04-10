@@ -49,18 +49,32 @@ typedef unsigned long long int  uint64;
 /* clang-format on */
 
 void solve(){
-    int n;cin>>n;
+    int n; cin>>n;
     vi a(n);
     for(int i=0;i<n;i++) cin>>a[i];
-    int t_x=0;
-    for(int i=0;i<n;i++) t_x^=a[i];
-    if(n%2==0){
-        if(t_x==0) cout<<t_x<<endl;
-        else cout<<-1<<endl;
+    int two=0;
+    for(int i=0;i<n;i++){
+        if(a[i]==2) two++;
+    }
+    if(two==0){
+        cout<<1<<endl;
+        return;
+    }
+    if(two%2!=0){
+        cout<<-1<<endl;
     }
     else{
-        cout<<t_x<<endl;
-    }
+        int n_i=two/2,c=0;
+        for(int i=0;i<n;i++){
+            if(a[i]==2){
+                c++;
+                if(c==n_i){
+                    cout<<i+1<<endl;
+                    break;
+                }
+            } 
+        }
+    }    
 }
 
 /* Main()  function */
