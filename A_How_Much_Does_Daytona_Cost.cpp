@@ -7,10 +7,8 @@ using vll = vector<long long>;
 void solve() {
     int n,k;
     cin >>n>>k;
-    
     vi a(n);
     for(int i=0;i<n;i++) cin >> a[i];
-
     unordered_set<int>st(begin(a),end(a));
     if(st.find(k) != st.end()){
         cout<<"YES"<<endl;

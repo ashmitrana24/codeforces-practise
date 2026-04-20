@@ -49,24 +49,20 @@ typedef unsigned long long int  uint64;
 /* clang-format on */
 
 void solve(){
-    int n;cin>>n;
-    vi a(n);
-    for(int i=0;i<n;i++) cin>>a[i];
-    if(n%2==0){
-        cout<<2<<endl;
-        cout<<1<<" "<<n<<endl;
-        cout<<1<<" "<<n<<endl;
+    string s;
+    cin >> s;
+    string r = s;
+    sort(r.begin(), r.end());
+    if(r == s){
+        reverse(r.begin(), r.end());
     }
-    else{
-        cout<<4<<endl;
-        cout<<1<<" "<<n-1<<endl;
-        cout<<1<<" "<<n-1<<endl;
-        cout<<n-1<<" "<<n<<endl;
-        cout<<n-1<<" "<<n<<endl;
+    if(r == s){
+        cout << "NO\n";
+    } else {
+        cout << "YES\n";
+        cout << r << "\n";
     }
-    
 }
-
 /* Main()  function */
 int main()
 {

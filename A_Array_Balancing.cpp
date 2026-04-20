@@ -50,21 +50,28 @@ typedef unsigned long long int  uint64;
 
 void solve(){
     int n;cin>>n;
-    vi a(n);
+    vi a(n),b(n);
     for(int i=0;i<n;i++) cin>>a[i];
-    if(n%2==0){
-        cout<<2<<endl;
-        cout<<1<<" "<<n<<endl;
-        cout<<1<<" "<<n<<endl;
+    for(int i=0;i<n;i++) cin>>b[i];
+
+    int i=0,j=0;
+    while(i<n){
+        if(a[i]>b[j]){
+            swap(a[i],b[j]);
+        }
+        i++,j++;
     }
-    else{
-        cout<<4<<endl;
-        cout<<1<<" "<<n-1<<endl;
-        cout<<1<<" "<<n-1<<endl;
-        cout<<n-1<<" "<<n<<endl;
-        cout<<n-1<<" "<<n<<endl;
+    ll s1=0,s2=0;
+    for(int i=0;i<n-1;i++){
+        ll d=abs(a[i]-a[i+1]);
+        s1+=d;
     }
-    
+    for(int i=0;i<n-1;i++){
+        ll d=abs(b[i]-b[i+1]);
+        s2+=d;
+    }
+    cout<<s1+s2<<endl;
+
 }
 
 /* Main()  function */
