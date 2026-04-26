@@ -49,18 +49,24 @@ typedef unsigned long long int  uint64;
 /* clang-format on */
 
 void solve(){
-    int n;cin>>n;
-    vi a(n);
-    for(int i=0;i<n;i++){
-        cin>>a[i];
+    ll n,p;cin>>n>>p;
+    vll a(n),b(n);
+    for(int i=0;i<n;i++) cin>>a[i];
+    for(int i=0;i<n;i++) cin>>b[i];
+    vector<pair<ll,ll>>c;
+    for(int i=0;i<n;i++) c.push_back({b[i],a[i]});
+    sort(begin(c),end(c));
+    ll cost=p,rem=n-1;
+    for(auto x:c){
+        ll cost_to_share=x.first;
+        ll sharing_cap=x.second;
+        if(cost_to_share>=p) break;
+        cost+=(cost_to_share*min(rem,sharing_cap));
+        rem-=min(rem,sharing_cap);
+        if(rem==0) break;
     }
-    for(auto c:a){
-        if(c==100){
-            cout<<"Yes"<<endl;
-            return;
-        }
-    }
-    cout<<"No"<<endl;
+    cost+=rem*p;
+    cout<<cost<<endl;
 }
 
 /* Main()  function */
