@@ -64,15 +64,24 @@ typedef unsigned long long int  uint64;
 
 /* clang-format on */
 
+const ll MAX_N=2e5+1;
 void solve(){
-    int n;cin>>n;
-    vll a(n);
-    for(auto &x:a) cin>>x;
-    ll ans=a[n-1]-a[0];
-    for(int i=1;i<n;i++) ans=max(ans,a[i]-a[0]);
-    for(int i=0;i<n-1;i++) ans=max(ans,a[n-1]-a[i]);
-    for(int i=1;i<n;i++) ans=max(ans,a[i-1]-a[i]);
-    cout<<ans<<endl;
+    ll n,k,q;cin>>n>>k>>q;
+    vll diff(MAX_N,0);
+    while(n--){
+        ll l,r;cin>>l>>r;
+        diff[l]+=1;
+        if(r+1<MAX_N) diff[r+1]-=1;
+    }
+    for(int i=1;i<MAX_N;i++) diff[i]+=diff[i-1];
+    vll valid(MAX_N,0);
+    for(int i=0;i<diff.size();i++) if(diff[i]>=k) valid[i]=1;
+    for(int i=1;i<valid.size();i++) valid[i]+=valid[i-1]; 
+    while(q--){
+        ll l,r;cin>>l>>r;
+        ll ans=valid[r]-(l>0?valid[l-1]:0);
+        cout<<ans<<endl;
+    }
 }
 
 /* Main()  function */
@@ -80,13 +89,8 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-
-    int tc;
-    cin >> tc;
-
-    while(tc--){
-        solve();
-    }
+    solve();
+    
     return 0;
 }
 /* Main() Ends Here */

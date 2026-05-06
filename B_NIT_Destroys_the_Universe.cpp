@@ -66,13 +66,25 @@ typedef unsigned long long int  uint64;
 
 void solve(){
     int n;cin>>n;
-    vll a(n);
+    vi a(n);
     for(auto &x:a) cin>>x;
-    ll ans=a[n-1]-a[0];
-    for(int i=1;i<n;i++) ans=max(ans,a[i]-a[0]);
-    for(int i=0;i<n-1;i++) ans=max(ans,a[n-1]-a[i]);
-    for(int i=1;i<n;i++) ans=max(ans,a[i-1]-a[i]);
-    cout<<ans<<endl;
+    int zero_cnt=0;
+    for(auto &x:a) if(x==0) zero_cnt++;
+    if(n==zero_cnt){
+        cout<<0<<endl;
+        return;
+    }
+    int l=0;
+    while(a[l]==0) l++;
+    int r=n-1;
+    while(a[r]==0) r--;
+    for(int i=l;i<=r;i++){
+        if(a[i]==0){
+            cout<<2<<endl;
+            return;
+        }
+    }
+    cout<<1<<endl;
 }
 
 /* Main()  function */

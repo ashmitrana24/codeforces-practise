@@ -65,14 +65,25 @@ typedef unsigned long long int  uint64;
 /* clang-format on */
 
 void solve(){
-    int n;cin>>n;
+    ll n,q;cin>>n>>q;
     vll a(n);
-    for(auto &x:a) cin>>x;
-    ll ans=a[n-1]-a[0];
-    for(int i=1;i<n;i++) ans=max(ans,a[i]-a[0]);
-    for(int i=0;i<n-1;i++) ans=max(ans,a[n-1]-a[i]);
-    for(int i=1;i<n;i++) ans=max(ans,a[i-1]-a[i]);
+    for(auto &x:a) cin>>x; //O(n)
+    vll idx_freq(n,0);
+    while(q--){ //O(q)
+        ll l,r;cin>>l>>r;
+        r--,l--;
+        idx_freq[l]+=1;
+        if(r+1<n) idx_freq[r+1]-=1;        
+    }
+    for(int i=1;i<n;i++) idx_freq[i]+=idx_freq[i-1]; //O(n)
+    sort(all(a)),sort(all(idx_freq)); //O(nlogn) + O(nlogn) => O(nlogn)
+    ll ans=0;
+    for(int i=0;i<n;i++){ //O(n)
+        ans+=1LL*a[i]*idx_freq[i];
+    }
     cout<<ans<<endl;
+    //TC - O(nlogn+nlogn) + O(q) = O(nlogn + q)
+    //SC - O(n)
 }
 
 /* Main()  function */
@@ -80,13 +91,8 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-
-    int tc;
-    cin >> tc;
-
-    while(tc--){
-        solve();
-    }
+    solve();
+    
     return 0;
 }
 /* Main() Ends Here */
