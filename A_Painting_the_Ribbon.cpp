@@ -65,18 +65,10 @@ typedef unsigned long long int  uint64;
 /* clang-format on */
 
 void solve(){
-    int n,m,k;cin>>n>>m>>k;
-    if(n==1){
-        cout<<"NO"<<endl;
-        return;
-    }
-    int req=n-m;
-    if(k>req){
-        cout<<"NO"<<endl;
-    }
-    else{
-        cout<<"YES"<<endl;
-    }   
+    ll n,m,k;cin>>n>>m>>k;
+    ll mx=(n+m-1)/m;
+    if(k>=n-mx) cout<<"NO"<<endl;
+    else cout<<"YES"<<endl;  
 }
 
 /* Main()  function */

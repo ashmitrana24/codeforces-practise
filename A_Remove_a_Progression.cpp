@@ -65,22 +65,8 @@ typedef unsigned long long int  uint64;
 /* clang-format on */
 
 void solve(){
-    ll x,n;cin>>x>>n;
-    if(n%4==0){
-        cout<<x<<endl;
-        return;
-    }
-    if(x&1){
-        if(n%4==1) x+=n;
-        else if(n%4==2) x-=1;
-        else if(n%4==3) x-=n+1; 
-    }
-    else{
-        if(n%4==1) x-=n;
-        else if(n%4==2) x+=1;
-        else if(n%4==3) x+=n+1; 
-    }
-    cout<<x<<endl;
+    ll n,x;cin>>n>>x;
+    cout<<1LL*2*x<<endl;
 }
 
 /* Main()  function */

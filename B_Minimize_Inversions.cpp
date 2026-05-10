@@ -65,22 +65,20 @@ typedef unsigned long long int  uint64;
 /* clang-format on */
 
 void solve(){
-    ll x,n;cin>>x>>n;
-    if(n%4==0){
-        cout<<x<<endl;
-        return;
+    ll n;cin>>n;;
+    vll a(n),b(n);
+    f(i,0,n) cin>>a[i];
+    f(i,0,n) cin>>b[i];
+    vpll c;
+    for(int i=0;i<n;i++){
+        c.pb({a[i],b[i]});
     }
-    if(x&1){
-        if(n%4==1) x+=n;
-        else if(n%4==2) x-=1;
-        else if(n%4==3) x-=n+1; 
-    }
-    else{
-        if(n%4==1) x-=n;
-        else if(n%4==2) x+=1;
-        else if(n%4==3) x+=n+1; 
-    }
-    cout<<x<<endl;
+    sort(all(c));
+    for(auto &x:c) cout<<x.ff<<" ";
+    cout<<endl;
+    for(auto &x:c) cout<<x.ss<<" ";
+    cout<<endl;
+
 }
 
 /* Main()  function */
