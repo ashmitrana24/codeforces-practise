@@ -70,15 +70,12 @@ void solve(){
     f(i,0,n) cin>>a[i];
     f(i,0,n) cin>>b[i];
     vpll c;
-    for(int i=0;i<n;i++){
-        c.pb({a[i],b[i]});
-    }
+    for(int i=0;i<n;i++) c.pb({a[i],b[i]});
     sort(all(c));
     for(auto &x:c) cout<<x.ff<<" ";
     cout<<endl;
     for(auto &x:c) cout<<x.ss<<" ";
     cout<<endl;
-
 }
 
 /* Main()  function */
