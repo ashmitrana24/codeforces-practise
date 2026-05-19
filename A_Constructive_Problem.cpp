@@ -64,11 +64,11 @@ typedef unsigned long long int  uint64;
 
 /* clang-format on */
 
-ll mex(vector<ll> const& A) {
-    set<ll> b(A.begin(), A.end());
-    ll result = 0;
-    while (b.count(result)) result++;
-    return result;
+ll mex(vll &a){
+    set<ll>s(all(a));
+    ll x=0;
+    while(s.count(x)) x++;
+    return x;
 }
 void solve(){
     ll n;cin>>n;

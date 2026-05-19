@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -69,17 +68,14 @@ void solve(){
     ll n;cin>>n;
     vll a(n);
     f(i,0,n) cin>>a[i];
-    f(i,0,n-1){
-        if(a[i]&1 && a[i+1]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        else if(!(a[i]&1) && !(a[i+1]&1)){
-            cout<<"NO"<<endl;
-            return;
+    ll ops=0,mx=0;
+    for(int i=0;i<n;i++){
+        if(a[i]>=mx){
+            ops++;
+            mx=max(a[i],mx);
         }
     }
-    cout<<"YES"<<endl;
+    cout<<ops<<endl;
 }
 
 /* Main()  function */

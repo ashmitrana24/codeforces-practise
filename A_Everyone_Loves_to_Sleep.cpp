@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -66,20 +65,16 @@ typedef unsigned long long int  uint64;
 /* clang-format on */
 
 void solve(){
-    ll n;cin>>n;
-    vll a(n);
-    f(i,0,n) cin>>a[i];
-    f(i,0,n-1){
-        if(a[i]&1 && a[i+1]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        else if(!(a[i]&1) && !(a[i+1]&1)){
-            cout<<"NO"<<endl;
-            return;
-        }
+    int n,H,M;cin>>n>>H>>M;
+    int time=H*60+M;
+    int ans=24*60;
+    while(n--){
+        int h,m;cin>>h>>m;
+        int t=h*60+m-time;
+        if(t<0) t+=24*60;
+        ans=min(ans,t);
     }
-    cout<<"YES"<<endl;
+    cout<<ans/60<<" "<<ans%60<<endl;
 }
 
 /* Main()  function */

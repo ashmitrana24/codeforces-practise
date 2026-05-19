@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -67,19 +66,15 @@ typedef unsigned long long int  uint64;
 
 void solve(){
     ll n;cin>>n;
-    vll a(n);
-    f(i,0,n) cin>>a[i];
-    f(i,0,n-1){
-        if(a[i]&1 && a[i+1]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        else if(!(a[i]&1) && !(a[i+1]&1)){
-            cout<<"NO"<<endl;
-            return;
-        }
+    string s;cin>>s;
+    ll cnt1=0,cnt2=0;
+    for(int i=0;i<n;i++){
+        if(s.find("2025")!=string::npos) cnt1++;
+        if(s.find("2026")!=string::npos) cnt2++;
     }
-    cout<<"YES"<<endl;
+    if(cnt2>0) cout<<0<<endl;
+    else if(cnt1>0) cout<<1<<endl;
+    else cout<<0<<endl;
 }
 
 /* Main()  function */

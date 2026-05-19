@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -65,21 +64,15 @@ typedef unsigned long long int  uint64;
 
 /* clang-format on */
 
+ll func(ll n){
+    if(n==1 || n==0) return 1;
+    return n*func(n-1);
+}
 void solve(){
-    ll n;cin>>n;
-    vll a(n);
-    f(i,0,n) cin>>a[i];
-    f(i,0,n-1){
-        if(a[i]&1 && a[i+1]&1){
-            cout<<"NO"<<endl;
-            return;
-        }
-        else if(!(a[i]&1) && !(a[i+1]&1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
+    ll n;
+    cin >> n;
+    ll ans = func(n);
+    cout<<ans<<endl;
 }
 
 /* Main()  function */
@@ -88,12 +81,9 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int tc;
-    cin >> tc;
-
-    while(tc--){
-        solve();
-    }
+    
+    solve();
+    
     return 0;
 }
 /* Main() Ends Here */

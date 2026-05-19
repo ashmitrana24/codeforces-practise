@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -68,18 +67,18 @@ typedef unsigned long long int  uint64;
 void solve(){
     ll n;cin>>n;
     vll a(n);
-    f(i,0,n) cin>>a[i];
-    f(i,0,n-1){
-        if(a[i]&1 && a[i+1]&1){
-            cout<<"NO"<<endl;
-            return;
+    for(int i=0;i<n;i++) cin>>a[i];
+    int idx1=0,idx2=0;
+    while(idx1<n && a[idx1]==n-idx1) idx1++;
+    for(int i=idx1;i<n;i++){
+        if(a[i]==n-idx1){
+            idx2=i;
+            break;
         }
-        else if(!(a[i]&1) && !(a[i+1]&1)){
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
+    } 
+    reverse(a.begin()+idx1,a.begin()+idx2+1);
+    for(auto &x:a) cout<<x<<" ";
+    cout<<endl;
 }
 
 /* Main()  function */
@@ -87,13 +86,11 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-
-    int tc;
-    cin >> tc;
-
+    int tc;cin>>tc;
     while(tc--){
         solve();
     }
+            
     return 0;
 }
 /* Main() Ends Here */
