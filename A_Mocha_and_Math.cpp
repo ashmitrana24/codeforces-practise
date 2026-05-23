@@ -1,3 +1,8 @@
+/*
+Submitted by: Ashmit Rana
+Timestamp: 2026-05-23 13:17:23 IST
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -43,6 +48,7 @@ void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cou
 #define setbit(x) __builtin_popcountll(x)
 #define lsb(x) ((x) & (-x))
 #define PI 3.1415926535897932384626433832795
+#define endl '\n'
 #define read(type) readInt<type>()
 ll min(ll a,int b) { if (a<b) return a; return b; }
 ll min(int a,ll b) { if (a<b) return a; return b; }
@@ -64,35 +70,13 @@ typedef unsigned long long int  uint64;
 
 /* clang-format on */
 
-int func(string &a,string &b){
-    int n=a.size();
-    int r=-1,l=-1;
-    for(int i=n-1;i>=0;i--){
-        if(a[i]==b[1]){
-            r=i;
-            break;
-        }
-    }
-    if(r==-1) return 1e9;
-    for(int i=r-1;i>=0;i--){
-        if(a[i]==b[0]){
-            l=i;
-            break;
-        }
-    }
-    if(l==-1) return 1e9;
-    return (n-r-1)+(r-l-1);
-}
-
 void solve(){
-    string s;cin>>s;
-    int n=sz(s);
-    vector<string>t={"00","25","50","75"};
-    int ans=INT_MAX;
-    for(int i=0;i<t.size();i++){
-        ans=min(ans,func(s,t[i]));
-    }
-    cout<<ans<<endl;
+    ll n;cin>>n;
+    vll a(n);
+    f(i,0,n) cin>>a[i];
+    ll res=a[0];
+    f(i,1,n) res&=a[i];
+    cout<<res<<endl;
 }
 
 /* Main()  function */

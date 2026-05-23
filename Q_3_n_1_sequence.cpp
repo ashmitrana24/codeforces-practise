@@ -64,35 +64,30 @@ typedef unsigned long long int  uint64;
 
 /* clang-format on */
 
-int func(string &a,string &b){
-    int n=a.size();
-    int r=-1,l=-1;
-    for(int i=n-1;i>=0;i--){
-        if(a[i]==b[1]){
-            r=i;
-            break;
-        }
-    }
-    if(r==-1) return 1e9;
-    for(int i=r-1;i>=0;i--){
-        if(a[i]==b[0]){
-            l=i;
-            break;
-        }
-    }
-    if(l==-1) return 1e9;
-    return (n-r-1)+(r-l-1);
+// int func(int n){
+//     if(n==1){
+//         return 1;
+//     }
+//     if(n&1){
+//         return 1+func(3*n+1);
+//     }
+//     else return 1+func(n/2);
+// }
+
+void func(int n , int &cnt){
+    cnt++;
+    if(n==1) return;
+    if(n&1) func(3*n+1,cnt);
+    else func(n/2,cnt);
 }
 
 void solve(){
-    string s;cin>>s;
-    int n=sz(s);
-    vector<string>t={"00","25","50","75"};
-    int ans=INT_MAX;
-    for(int i=0;i<t.size();i++){
-        ans=min(ans,func(s,t[i]));
-    }
-    cout<<ans<<endl;
+    int n;cin>>n;
+    // int ans=func(n);
+    // cout<<ans<<endl;
+    int cnt=0;
+    func(n,cnt);
+    cout<<cnt<<endl;
 }
 
 /* Main()  function */
@@ -101,12 +96,8 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int tc;
-    cin >> tc;
-
-    while(tc--){
-        solve();
-    }
+    solve();
+    
     return 0;
 }
 /* Main() Ends Here */
