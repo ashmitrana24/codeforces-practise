@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-05-22 22:49:04 IST
+Timestamp: 2026-05-23 20:43:57 IST
 */
 
 #include <bits/stdc++.h>
@@ -71,11 +71,20 @@ typedef unsigned long long int  uint64;
 /* clang-format on */
 
 void solve(){
-    int n;cin>>n;
-    int y,r;cin>>y>>r;
-    int ans=min(n,r);
-    ans+=min(y/2,n-ans);
-    cout<<ans<<endl;
+    ll n;cin>>n;
+    vll a(n),b(n);
+    f(i,0,n) cin>>a[i];
+    f(i,0,n) cin>>b[i];
+    int i=0,j=0;
+    while(i<n){
+        if(a[i]>b[i]){
+            swap(a[i],b[i]);
+        }
+        i++,j++;
+    }
+    ll sum=accumulate(all(b),0);
+    ll mx=*max_element(all(a));
+    cout<<sum+mx<<endl;
 }
 
 /* Main()  function */
