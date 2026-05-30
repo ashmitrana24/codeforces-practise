@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-05-24 21:41:18 IST
+Timestamp: 2026-05-28 08:31:28 IST
 */
 
 #include <bits/stdc++.h>
@@ -70,20 +70,28 @@ typedef unsigned long long int  uint64;
 
 /* clang-format on */
 
-void solve(){
-    ll n;cin>>n;
-    vll a(n);
-    f(i,0,n) cin>>a[i];
-    sort(all(a));
-    f(i,0,n-1) if(i&1) swap(a[i],a[i+1]);
-    bool ok=true;
-    f(i,0,n-1){
-        if(a[i]>a[i+1]){
-            ok=false;
-            break;
-        }
+int dx[]={1,0};
+int dy[]={0,1};
+int helper(vector<vector<int>>&a,int i,int j){
+    int n=a.size(),m=a[0].size();
+    if(i==n-1 && j==m-1) return a[n-1][m-1];
+    if(i>=n || j>=m) return -INF;
+    int ans=-INF;
+    for(int k=0;k<2;k++){
+        int ni=dx[k]+i;
+        int nj=dy[k]+j;
+        ans=max(ans,a[i][j]+helper(a,ni,nj));
     }
-    cout<<((ok)?"YES":"NO")<<endl;
+    return ans;
+}
+void solve(){
+    int n,m;cin>>n>>m;
+    vector<vector<int>> a(n,vector<int>(m));
+    f(i,0,n){
+        f(j,0,m) cin>>a[i][j];
+    }
+    int ans=helper(a,0,0);
+    cout<<ans<<endl;
 }
 
 /* Main()  function */
@@ -91,13 +99,7 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-
-    int tc;
-    cin >> tc;
-
-    while(tc--){
-        solve();
-    }
+    solve();
     return 0;
 }
 /* Main() Ends Here */

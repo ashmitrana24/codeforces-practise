@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-05-24 21:41:18 IST
+Timestamp: 2026-05-28 09:14:02 IST
 */
 
 #include <bits/stdc++.h>
@@ -69,21 +69,20 @@ typedef long long int int64;
 typedef unsigned long long int  uint64;
 
 /* clang-format on */
-
+bool helper(vi &a,int i,int sum,int x){
+    int n=a.size();
+    if(i==n) return sum==x;
+    bool add=helper(a,i+1,sum+a[i],x);
+    bool sub=helper(a,i+1,sum-a[i],x);
+    return add||sub;
+}
 void solve(){
-    ll n;cin>>n;
-    vll a(n);
+    int n,x;cin>>n>>x;
+    vi a(n);
     f(i,0,n) cin>>a[i];
-    sort(all(a));
-    f(i,0,n-1) if(i&1) swap(a[i],a[i+1]);
-    bool ok=true;
-    f(i,0,n-1){
-        if(a[i]>a[i+1]){
-            ok=false;
-            break;
-        }
-    }
-    cout<<((ok)?"YES":"NO")<<endl;
+    bool ans=helper(a,1,a[0],x);
+    if(ans) cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }
 
 /* Main()  function */
@@ -91,13 +90,7 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-
-    int tc;
-    cin >> tc;
-
-    while(tc--){
-        solve();
-    }
+    solve();
     return 0;
 }
 /* Main() Ends Here */

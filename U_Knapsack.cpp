@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-05-24 21:41:18 IST
+Timestamp: 2026-05-27 17:47:09 IST
 */
 
 #include <bits/stdc++.h>
@@ -69,21 +69,23 @@ typedef long long int int64;
 typedef unsigned long long int  uint64;
 
 /* clang-format on */
-
+int helper(vpii &a,int i,int W,int curr_w){
+    if(curr_w>W) return -INF;
+    if(i==a.size()) return 0;
+    int t=0,s=0;
+    t+=a[i].ss+helper(a,i+1,W,curr_w+a[i].ff);
+    s+=helper(a,i+1,W,curr_w);
+    return max(t,s);
+}
 void solve(){
-    ll n;cin>>n;
-    vll a(n);
-    f(i,0,n) cin>>a[i];
-    sort(all(a));
-    f(i,0,n-1) if(i&1) swap(a[i],a[i+1]);
-    bool ok=true;
-    f(i,0,n-1){
-        if(a[i]>a[i+1]){
-            ok=false;
-            break;
-        }
+    int n,W;cin>>n>>W;
+    vpii a;
+    while(n--){
+        int w,v;cin>>w>>v;
+        a.push_back({w,v});
     }
-    cout<<((ok)?"YES":"NO")<<endl;
+    ll ans=helper(a,0,W,0);
+    cout<<ans<<endl;
 }
 
 /* Main()  function */
@@ -92,12 +94,8 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int tc;
-    cin >> tc;
-
-    while(tc--){
         solve();
-    }
+    
     return 0;
 }
 /* Main() Ends Here */

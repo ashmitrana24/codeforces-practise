@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-05-24 21:41:18 IST
+Timestamp: 2026-05-27 17:01:59 IST
 */
 
 #include <bits/stdc++.h>
@@ -70,20 +70,31 @@ typedef unsigned long long int  uint64;
 
 /* clang-format on */
 
+void helper(vector<vector<int>>&a,vector<vector<int>>&b,int i,int j,int r,int c){
+    if(i==r) return;
+    if(j==c){
+        helper(a,b,i+1,0,r,c);
+        return;
+    }
+    cout<<a[i][j]+b[i][j]<<" ";
+    if(j==c-1) cout<<endl;
+    helper(a,b,i,j+1,r,c);
+}
+
 void solve(){
-    ll n;cin>>n;
-    vll a(n);
-    f(i,0,n) cin>>a[i];
-    sort(all(a));
-    f(i,0,n-1) if(i&1) swap(a[i],a[i+1]);
-    bool ok=true;
-    f(i,0,n-1){
-        if(a[i]>a[i+1]){
-            ok=false;
-            break;
+    int r,c;cin>>r>>c;
+    vector<vector<int>> a(r,vector<int>(c)), b(r,vector<int>(c));
+    f(i,0,r){
+        f(j,0,c){
+            cin>>a[i][j];
         }
     }
-    cout<<((ok)?"YES":"NO")<<endl;
+    f(i,0,r){
+        f(j,0,c){
+            cin>>b[i][j];
+        }
+    }
+    helper(a,b,0,0,r,c);
 }
 
 /* Main()  function */
@@ -92,12 +103,9 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int tc;
-    cin >> tc;
 
-    while(tc--){
         solve();
-    }
+    
     return 0;
 }
 /* Main() Ends Here */

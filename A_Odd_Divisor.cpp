@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-05-24 21:41:18 IST
+Timestamp: 2026-05-29 23:38:39 IST
 */
 
 #include <bits/stdc++.h>
@@ -71,19 +71,10 @@ typedef unsigned long long int  uint64;
 /* clang-format on */
 
 void solve(){
-    ll n;cin>>n;
-    vll a(n);
-    f(i,0,n) cin>>a[i];
-    sort(all(a));
-    f(i,0,n-1) if(i&1) swap(a[i],a[i+1]);
-    bool ok=true;
-    f(i,0,n-1){
-        if(a[i]>a[i+1]){
-            ok=false;
-            break;
-        }
-    }
-    cout<<((ok)?"YES":"NO")<<endl;
+    ll n;
+    cin>>n;
+    if((n&(n-1)))cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }
 
 /* Main()  function */
