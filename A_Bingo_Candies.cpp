@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-06-16 07:41:53 IST
+Timestamp: 2026-06-16 08:29:38 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -18,6 +18,7 @@ using namespace std;
 #define vpll vector<pll>
 #define umii unordered_map<int,int>
 #define usi unordered_set<int>
+#define v vector
 #define ff first
 #define ss second
 /* FUNCTIONS */
@@ -89,16 +90,19 @@ typedef unsigned long long int uint64;
  */
 void solve(){
     int n;cin>>n;
-    vll a(n);
-    f(i,0,n) cin>>a[i];
-    ll ans=0;
+    map<ll,ll>cnt;
     f(i,0,n){
-        if(a[i]!=1){
-            ans+=a[i];
+        f(j,0,n){
+            int x;cin>>x;
+            cnt[x]++;
+            if(cnt[x]>n*(n-1)){
+                no();
+                return;
+            }
+            
         }
     }
-    if(a[n-1]==1) ans++;
-    cout<<ans<<endl;
+    yes();
 }
 int main(){
     ios_base::sync_with_stdio(false);

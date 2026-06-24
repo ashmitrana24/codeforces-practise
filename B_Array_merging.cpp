@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-06-16 07:41:53 IST
+Timestamp: 2026-06-24 16:10:53 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -88,16 +88,35 @@ typedef unsigned long long int uint64;
  * 
  */
 void solve(){
-    int n;cin>>n;
-    vll a(n);
+    ll n;cin>>n;
+    vll a(n),b(n);
     f(i,0,n) cin>>a[i];
-    ll ans=0;
-    f(i,0,n){
-        if(a[i]!=1){
-            ans+=a[i];
+    f(i,0,n) cin>>b[i];
+    vll fa(2*n+1,0),fb(2*n+1,0);
+    ll cnt=1;
+    for(int i=1;i<n;i++){
+        if(a[i-1]==a[i]){
+            cnt++;
+        }
+        else{
+            fa[a[i-1]]=max(fa[a[i-1]],cnt);
+            cnt=1;
         }
     }
-    if(a[n-1]==1) ans++;
+    fa[a[n-1]]=max(fa[a[n-1]],cnt);
+    cnt=1;
+    for(int i=1;i<n;i++){
+        if(b[i-1]==b[i]){
+            cnt++;
+        }
+        else{
+            fb[b[i-1]]=max(fb[b[i-1]],cnt);
+            cnt=1;
+        }
+    }
+    fb[b[n-1]]=max(fb[b[n-1]],cnt);
+    ll ans=0;
+    for(int i=1;i<=2*n;i++) ans=max(ans,fa[i]+fb[i]);
     cout<<ans<<endl;
 }
 int main(){

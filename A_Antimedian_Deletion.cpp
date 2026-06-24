@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-06-16 07:41:53 IST
+Timestamp: 2026-06-24 09:39:33 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -87,18 +87,14 @@ typedef unsigned long long int uint64;
  * APR:
  * 
  */
-void solve(){
+void solve() {
     int n;cin>>n;
     vll a(n);
     f(i,0,n) cin>>a[i];
-    ll ans=0;
-    f(i,0,n){
-        if(a[i]!=1){
-            ans+=a[i];
-        }
+    if(n>=3||n==2){
+        f(i,0,n) cout<<2<<" ";
     }
-    if(a[n-1]==1) ans++;
-    cout<<ans<<endl;
+    else f(i,0,n) cout<<1<<endl;
 }
 int main(){
     ios_base::sync_with_stdio(false);

@@ -70,21 +70,18 @@ typedef unsigned long long int  uint64;
 
 /* clang-format on */
 
-void solve(){
-    ll n;cin>>n;
-    vll a(n),b(n);
-    f(i,0,n) cin>>a[i];
-    f(i,0,n) cin>>b[i];
-    int i=0,j=0;
-    while(i<n){
-        if(a[i]>b[i]){
-            swap(a[i],b[i]);
-        }
-        i++,j++;
+void solve() {
+    ll n;
+    cin >> n;
+    vll a(n), b(n);
+    for (int i=0;i<n;i++) cin>>a[i];
+    for (int i=0;i<n;i++) cin>>b[i];
+    ll sum =0,mx =0;
+    for (int i = 0; i < n; i++) {
+        sum+=max(a[i],b[i]);
+        mx=max(mx,min(a[i],b[i]));
     }
-    ll sum=accumulate(all(b),0);
-    ll mx=*max_element(all(a));
-    cout<<sum+mx<<endl;
+    cout <<sum+mx << endl;
 }
 
 /* Main()  function */

@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-06-16 07:41:53 IST
+Timestamp: 2026-06-16 18:42:16 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -90,14 +90,18 @@ typedef unsigned long long int uint64;
 void solve(){
     int n;cin>>n;
     vll a(n);
-    f(i,0,n) cin>>a[i];
-    ll ans=0;
+    f(i,0,n)cin>>a[i];
+    ll pos=0;
     f(i,0,n){
-        if(a[i]!=1){
-            ans+=a[i];
+        if(a[i]>0) pos+=a[i];
+        else{
+            ll rem=min(abs(a[i]),pos);
+            a[i]+=rem;
+            pos-=rem;
         }
     }
-    if(a[n-1]==1) ans++;
+    ll ans=0;
+    f(i,0,n) if(a[i]<0) ans+=abs(a[i]);
     cout<<ans<<endl;
 }
 int main(){
