@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-07-12 22:50:31 IST
+Timestamp: 2026-07-21 09:02:47 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -89,38 +89,33 @@ typedef unsigned long long int uint64;
  * 
  */
 void solve(){
-   ll n;cin>>n;
-   vll a(n);
-   f(i,0,n)cin>>a[i];
-   set<ll>st;
-   f(i,0,n){
-        if(a[i]%2==0){
-            st.insert(a[i]);
-        }
-        else continue;
-   }
-   if(st.size()==0){
-        cout<<0<<endl;
-        return;
-   }
-   ll ans=0;
-   while(!st.empty()){
-        ll x=*st.rbegin();
-        st.erase(x);
-        x/=2;
-        ans++;
-        if(x%2==0){
-            st.insert(x);
+    int n;cin>>n;
+    vll a(n);
+    for(int i=0;i<n;i++) cin>>a[i];
+    vector<pair<ll,ll>>r;
+    r.pb({1,a[0]});
+    for(int i=1;i<n;i++){
+        ll prev=r[i-1].ss;
+        r.pb({prev+1,prev+1+(a[i]-1)});
+    }
+    ll q;cin>>q;
+    while(q--){
+        ll x;cin>>x;
+        ll l=0,h=n-1;
+        while(l<=h){
+            ll mid=l+(h-l)/2;
+            if(x>=r[mid].ff && x<=r[mid].ss){
+                cout<<mid+1<<endl;
+                break;
+            }
+            else if(x<r[mid].ff) h=mid-1;
+            else l=mid+1; 
         }
     }
-    cout<<ans<<endl;
 }
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    int tc;
-    cin>>tc;
-    while(tc--)solve();
+    solve();
     return 0;
 }

@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-07-12 22:50:31 IST
+Timestamp: 2026-07-18 11:20:50 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -88,34 +88,41 @@ typedef unsigned long long int uint64;
  * APR:
  * 
  */
+bool checker(ll mid,vector<pair<ll,ll>>&seg,vector<ll>&qu,int n){
+    vector<ll>a(n+1,0);
+    for(int i=0;i<mid;i++) a[qu[i]]=1;
+    vector<ll>ps(n+1,0);
+    for(int i=1;i<ps.size();i++) ps[i]=ps[i-1]+a[i];
+    for(auto [l,r]:seg){
+        ll cnt1=ps[r]-ps[l-1];
+        ll len=r-l+1;
+        if(2*cnt1>len) return true;
+    }
+    return false;
+}
 void solve(){
-   ll n;cin>>n;
-   vll a(n);
-   f(i,0,n)cin>>a[i];
-   set<ll>st;
-   f(i,0,n){
-        if(a[i]%2==0){
-            st.insert(a[i]);
+    ll n,m;cin>>n>>m;
+    vector<pair<ll,ll>>seg;
+    for(int i=0;i<m;i++){
+        ll l,r;
+        cin>>l>>r;
+        seg.pb({l,r});
+    }
+    ll q;cin>>q;
+    vector<ll>qu(q);
+    for(int i=0;i<q;i++) cin>>qu[i];
+    ll l=1,h=q;
+    ll ans=-1;
+    while(l<=h){
+        ll mid=l+(h-l)/2;
+        if(checker(mid,seg,qu,n)){
+            ans=mid;
+            h=mid-1;
         }
-        else continue;
-   }
-   if(st.size()==0){
-        cout<<0<<endl;
-        return;
-   }
-   ll ans=0;
-   while(!st.empty()){
-        ll x=*st.rbegin();
-        st.erase(x);
-        x/=2;
-        ans++;
-        if(x%2==0){
-            st.insert(x);
-        }
+        else l=mid+1;
     }
     cout<<ans<<endl;
 }
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);

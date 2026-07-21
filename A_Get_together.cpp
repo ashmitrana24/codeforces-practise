@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-07-12 22:50:31 IST
+Timestamp: 2026-07-18 08:47:40 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -88,39 +88,48 @@ typedef unsigned long long int uint64;
  * APR:
  * 
  */
-void solve(){
-   ll n;cin>>n;
-   vll a(n);
-   f(i,0,n)cin>>a[i];
-   set<ll>st;
-   f(i,0,n){
-        if(a[i]%2==0){
-            st.insert(a[i]);
+bool checker(vector<pair<ll,ll>>&p , long double t){
+    vector<pair<double,double>>coords;
+    for(int i=0;i<p.size();i++){
+        long double cord=p[i].ff;
+        long double speed=p[i].ss;
+        long double r_dis=cord+(speed*t);
+        long double l_dis=cord-(speed*t);
+        coords.pb({l_dis,r_dis});
+    }
+    long double mn_r=1e18,mx_l=-1e18;
+    for(auto &x:coords){
+        if(x.ss<mn_r){
+            mn_r=x.ss;
         }
-        else continue;
-   }
-   if(st.size()==0){
-        cout<<0<<endl;
-        return;
-   }
-   ll ans=0;
-   while(!st.empty()){
-        ll x=*st.rbegin();
-        st.erase(x);
-        x/=2;
-        ans++;
-        if(x%2==0){
-            st.insert(x);
+        if(x.ff>mx_l){
+            mx_l=x.ff;
         }
     }
-    cout<<ans<<endl;
+    return mx_l<=mn_r;
 }
-
+void solve(){
+    ll n;
+    cin>>n;
+    vector<pair<ll,ll>>p;
+    while(n--){
+        ll x,y;
+        cin>>x>>y;
+        p.pb({x,y});
+    }
+    long double l=0,r=1e19;
+    for(int i=0;i<100;i++){
+        long double mid=(l+r)/2;
+        if(checker(p,mid)){
+            r=mid;
+        }
+        else l=mid;
+    }
+    cout<<setprecision(7)<<fixed<<r<<endl;
+}
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    int tc;
-    cin>>tc;
-    while(tc--)solve();
+    solve();
     return 0;
 }

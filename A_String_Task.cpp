@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-07-12 22:50:31 IST
+Timestamp: 2026-07-17 21:43:00 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -88,39 +88,34 @@ typedef unsigned long long int uint64;
  * APR:
  * 
  */
+bool vowel(char x){
+    if(x=='A'||x=='a'||x=='E'||x=='e'||x=='I'||x=='i'||x=='o'||x=='O'||x=='U'||x=='u'||x=='Y'||x=='y'){
+        return true;
+    }
+    return false;
+}
 void solve(){
-   ll n;cin>>n;
-   vll a(n);
-   f(i,0,n)cin>>a[i];
-   set<ll>st;
-   f(i,0,n){
-        if(a[i]%2==0){
-            st.insert(a[i]);
+    string s;
+    cin>>s;
+    int n=s.size();
+    string ans="";
+    for(int i=0;i<n;i++){
+        if(vowel(s[i])) continue;
+        else if(!vowel(s[i]) && (s[i]>='A' && s[i]<='Z')){
+            char x=tolower(s[i]);
+            ans+=".";
+            ans+=x;
         }
-        else continue;
-   }
-   if(st.size()==0){
-        cout<<0<<endl;
-        return;
-   }
-   ll ans=0;
-   while(!st.empty()){
-        ll x=*st.rbegin();
-        st.erase(x);
-        x/=2;
-        ans++;
-        if(x%2==0){
-            st.insert(x);
+        else{
+            ans+=".";
+            ans+=s[i];
         }
     }
     cout<<ans<<endl;
 }
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    int tc;
-    cin>>tc;
-    while(tc--)solve();
+    solve();
     return 0;
 }

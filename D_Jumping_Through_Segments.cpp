@@ -1,6 +1,5 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-07-12 22:50:31 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -88,39 +87,43 @@ typedef unsigned long long int uint64;
  * APR:
  * 
  */
+bool checker(vector<pair<ll,ll>>&a , ll k){
+    ll L=0,R=0;
+    for(auto &x:a){
+        ll l=x.ff;
+        ll r=x.ss;
+        L=max(l,L-k);
+        R=min(r,R+k);
+        if(L>R){
+            return false;
+        }
+    }
+    return true;
+}
 void solve(){
-   ll n;cin>>n;
-   vll a(n);
-   f(i,0,n)cin>>a[i];
-   set<ll>st;
-   f(i,0,n){
-        if(a[i]%2==0){
-            st.insert(a[i]);
+    ll n;cin>>n;
+    vector<pair<ll,ll>>a;
+    for(int i=0;i<n;i++){
+        ll l,r;
+        cin>>l>>r;
+        a.pb({l,r});
+    }
+    ll l=0,h=1e18,ans=0;
+    while(l<=h){
+        ll mid=l+(h-l)/2;
+        if(checker(a,mid)){
+            ans=mid;
+            h=mid-1;
         }
-        else continue;
-   }
-   if(st.size()==0){
-        cout<<0<<endl;
-        return;
-   }
-   ll ans=0;
-   while(!st.empty()){
-        ll x=*st.rbegin();
-        st.erase(x);
-        x/=2;
-        ans++;
-        if(x%2==0){
-            st.insert(x);
-        }
+        else l=mid+1;
     }
     cout<<ans<<endl;
 }
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     int tc;
     cin>>tc;
-    while(tc--)solve();
+    while(tc--) solve();
     return 0;
 }

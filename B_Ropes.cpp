@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-07-12 22:50:31 IST
+Timestamp: 2026-07-19 13:10:30 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -88,39 +88,30 @@ typedef unsigned long long int uint64;
  * APR:
  * 
  */
-void solve(){
-   ll n;cin>>n;
-   vll a(n);
-   f(i,0,n)cin>>a[i];
-   set<ll>st;
-   f(i,0,n){
-        if(a[i]%2==0){
-            st.insert(a[i]);
-        }
-        else continue;
-   }
-   if(st.size()==0){
-        cout<<0<<endl;
-        return;
-   }
-   ll ans=0;
-   while(!st.empty()){
-        ll x=*st.rbegin();
-        st.erase(x);
-        x/=2;
-        ans++;
-        if(x%2==0){
-            st.insert(x);
-        }
+bool checker(vll &a , long double mid , long double k){
+    int cnt=0;
+    for(int i=0;i<a.size();i++){
+        cnt+=(long long)(a[i]/mid);
     }
-    cout<<ans<<endl;
+    return cnt>=k;
 }
-
+void solve(){
+    ll n,k;cin>>n>>k;
+    vll a(n);
+    for(int i=0;i<n;i++) cin>>a[i];
+    long double l=0,h=1e18;
+    for(int i=0;i<100;i++){
+        long double mid=(h+l)/2;
+        if(checker(a,mid,k)){
+            l=mid;
+        }
+        else h=mid;
+    }
+    cout<<fixed<<setprecision(7)<<l<<endl;
+}
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    int tc;
-    cin>>tc;
-    while(tc--)solve();
+    solve();
     return 0;
 }
