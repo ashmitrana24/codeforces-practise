@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-08-17 19:06:18 IST
+Timestamp: 2026-08-18 09:24:25 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -89,20 +89,16 @@ typedef unsigned long long int uint64;
  * 
  */
 void solve(){
-    int n,m;
-    cin>>n>>m;
-    string s,p;
-    cin>>s>>p;
-    map<char,int>mp,win;
-    for(auto &c:p) mp[c]++;
+    ll n,x;
+    cin>>n>>x;
+    vll a(n);
+    for(auto &i:a) cin>>i;
     ll ans=0;
-    for(int l=0,r=0;r<n;r++){
-        win[s[r]]++;
-        while(win[s[r]] > mp[s[r]]){
-            win[s[l]]--;
-            l++;
+    for(int l=0,r=1;l<n;l++){
+        while(r<n && a[r]-a[l]<=x){
+            r++;
         }
-        ans+=(r-l+1);
+        ans+=n-r;
     }
     cout<<ans<<endl;
 }
