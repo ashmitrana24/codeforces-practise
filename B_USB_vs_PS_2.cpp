@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-08-20 19:02:04 IST
+Timestamp: 2026-08-22 23:19:31 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -89,27 +89,40 @@ typedef unsigned long long int uint64;
  * 
  */
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    vector<ll>posi;
-    for(int i=0;i<n;i++){
-        if(s[i]=='0'){
-            posi.pb(i);
+    ll a,b,c;
+    cin>>a>>b>>c;
+    vector<pair<ll,string>>M;
+    ll m;
+    cin>>m;
+    for(int i=0;i<m;i++){
+        ll x;cin>>x;
+        string s;cin>>s;
+        M.pb({x,s});
+    }
+    sort(all(M));
+    ll cost=0,cnt=0;
+    for(int i=0;i<M.size();i++){
+        if(M[i].ss == "USB" && a>0){
+            cost += M[i].ff;
+            cnt++;
+            a--;
+            M[i].ff=-1;
+        }
+        else if(M[i].ss == "PS/2" && b>0){
+            cost += M[i].ff;
+            cnt++;
+            b--;
+            M[i].ff=-1;
         }
     }
-    int ans=INF;
-    int i=0,j=k,z=0;
-    while(j<posi.size()){
-        while(max(posi[z]-posi[i],posi[j]-posi[z]) > max(posi[z+1]-posi[i],posi[j]-posi[z+1])){
-            z++;
+    for(int i=0;i<M.size() && c>0;i++){
+        if(M[i].ff != -1){
+            cost += M[i].first;
+            cnt++;
+            c--;
         }
-        int m=max(posi[z]-posi[i],posi[j]-posi[z]);
-        ans=min(ans,m);
-        i++,j++;
     }
-    cout<<ans<<endl;
+    cout<<cnt<<" "<<cost<<endl;
 }
 int main(){
     ios_base::sync_with_stdio(false);

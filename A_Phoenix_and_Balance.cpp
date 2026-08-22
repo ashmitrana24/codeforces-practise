@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-08-20 19:02:04 IST
+Timestamp: 2026-08-22 09:06:42 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -89,31 +89,26 @@ typedef unsigned long long int uint64;
  * 
  */
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    vector<ll>posi;
+    int n;
+    cin>>n;
+    vi a;
     for(int i=0;i<n;i++){
-        if(s[i]=='0'){
-            posi.pb(i);
-        }
+        a.pb(pow(2,i+1));
     }
-    int ans=INF;
-    int i=0,j=k,z=0;
-    while(j<posi.size()){
-        while(max(posi[z]-posi[i],posi[j]-posi[z]) > max(posi[z+1]-posi[i],posi[j]-posi[z+1])){
-            z++;
-        }
-        int m=max(posi[z]-posi[i],posi[j]-posi[z]);
-        ans=min(ans,m);
-        i++,j++;
+    int s1=a[n-1],s2=0;
+    for(int i=0;i<n/2-1;i++){
+        s1 += a[i];
     }
-    cout<<ans<<endl;
+    for(int i=n/2-1;i<n-1;i++){
+        s2 += a[i];
+    }
+    cout<<abs(s1-s2)<<endl;
 }
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    solve();
+    int tc;
+    cin>>tc;
+    while(tc--)solve();
     return 0;
 }
