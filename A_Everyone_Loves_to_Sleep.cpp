@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 /* clang-format off */
 
 /* TYPES  */

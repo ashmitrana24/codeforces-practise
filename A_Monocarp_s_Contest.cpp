@@ -1,6 +1,5 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-09-04 19:20:43 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -21,6 +20,7 @@ using namespace std;
 #define v vector
 #define ff first
 #define ss second
+#define triplet tuple<int,int,int>
 /* FUNCTIONS */
 #define f(i,s,e) for(ll i=s;i<e;i++)
 #define cf(i,s,e) for(ll i=s;i<=e;i++)
@@ -89,25 +89,35 @@ typedef unsigned long long int uint64;
  * 
  */
 void solve(){
-    string s;
-    cin>>s;
-    string t="hello";
-    int j=0;
-    for(auto i:s){
-        if(j<5 && i==t[j]){
-            j++;
-        }
+    int n;
+    cin >> n;
+    vi a(n);
+    for(auto &i:a) cin >> i;
+    int f1=0,f0=0;
+    for(auto &i:a){
+        if(i==1) f1++;
+        else f0++;
     }
-    if(j==5){
-        cout<<"YES"<<endl;
+    if(a[0]==0 && a[n-1]==0){
+        cout<<0<<endl;
+        return;
     }
-    else{
-        cout<<"NO"<<endl;
+    if(f0<2){
+        cout<<-1<<endl;
+        return;
     }
+    else if(a[0]==1 && a[n-1]==1){
+        cout<<2<<endl;
+    }
+    else cout<<1<<endl;
 }
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    solve();
+    int tc;
+    cin>>tc;
+    while(tc--) solve();
+    //solve();
     return 0;
 }

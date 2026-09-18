@@ -1,6 +1,6 @@
 /*
 Submitted by: Ashmit Rana
-Timestamp: 2026-09-04 19:20:43 IST
+Timestamp: 2026-09-13 14:51:07 IST
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -89,25 +89,22 @@ typedef unsigned long long int uint64;
  * 
  */
 void solve(){
-    string s;
-    cin>>s;
-    string t="hello";
-    int j=0;
-    for(auto i:s){
-        if(j<5 && i==t[j]){
-            j++;
-        }
+    int n;
+    cin >> n;
+    vi a(n);
+    int f0=0,f1=0;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        if (a[i] == 0) f0++;
+        else f1++;
     }
-    if(j==5){
-        cout<<"YES"<<endl;
-    }
-    else{
-        cout<<"NO"<<endl;
-    }
+    cout << (f0 > f1 ? "Elsie" : "Bessie") << endl;
 }
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    solve();
+    int tc;
+    cin>>tc;
+    while(tc--)solve();
     return 0;
 }
