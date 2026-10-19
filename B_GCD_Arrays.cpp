@@ -91,21 +91,11 @@ typedef unsigned long long int uint64;
 void solve(){
     int l,r,k; cin >> l >> r >> k;
     if(l==r){
-        if(l > 1){
-            cout << "YES" << endl;
-        }
-        else{
-            cout << "NO" << endl;
-        }
+        cout<<(l>1?"YES":"NO")<<endl;
         return;
     }
     ll od_cnt = (r+1)/2-l/2;
-    if(od_cnt > k){
-        cout << "NO" << endl;
-    }
-    else{
-        cout << "YES" <<endl;
-    }
+    cout<<(od_cnt>k?"NO":"YES")<<endl;
 }
 int main(){
     ios_base::sync_with_stdio(false);
