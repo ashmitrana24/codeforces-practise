@@ -1,113 +1,133 @@
-/*
-Submitted by: Ashmit Rana
-Timestamp: 2026-09-18 23:24:57 IST
-*/
+/**
+ *  Author  : Ashmit
+ *  Problem : Codeforces
+ */
 #include <bits/stdc++.h>
 using namespace std;
-/* clang-format off */
-/* TYPES */
-#define ll long long
-#define pii pair<int,int>
-#define pll pair<ll,ll>
-#define vi vector<int>
-#define vll vector<ll>
-#define mii map<int,int>
-#define si set<int>
-#define sc set<char>
-#define vpii vector<pii>
-#define vpll vector<pll>
-#define umii unordered_map<int,int>
-#define usi unordered_set<int>
-#define v vector
-#define ff first
-#define ss second
-/* FUNCTIONS */
-#define f(i,s,e) for(ll i=s;i<e;i++)
-#define cf(i,s,e) for(ll i=s;i<=e;i++)
-#define rf(i,e,s) for(ll i=e-1;i>=s;i--)
-#define trav(x,a) for(auto &x:a)
-#define sz(x) (int)(x).size()
+// ---------- Types ----------
+using ll = long long;
+using ull = unsigned long long;
+using i128 = __int128_t;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+using vll = vector<ll>;
+using vvi = vector<vi>;
+using vvll = vector<vll>;
+using vb = vector<bool>;
+using vs = vector<string>;
+// ---------- Macros ----------
+#define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
+#define sz(x) ((int)(x).size())
 #define pb push_back
 #define eb emplace_back
-#define mp make_pair
-#define all(a) (a).begin(),(a).end()
-#define rall(a) (a).rbegin(),(a).rend()
-#define fraction(a) cout.unsetf(ios::floatfield);cout.precision(a);cout.setf(ios::fixed,ios::floatfield);
-/* PRINTS */
-template<class T>
-void print_v(vector<T>&v){cout<<"{";for(auto x:v)cout<<x<<",";cout<<"\b}";}
-/* UTILS */
-#define MOD 1000000007
-#define INF 1e9
-#define LINF 1e18
-#define setbit(x) __builtin_popcountll(x)
-#define lsb(x) ((x)&(-x))
-#define PI 3.1415926535897932384626433832795
-#define endl '\n'
-ll min(ll a,int b){return a<b?a:b;}
-ll min(int a,ll b){return a<b?a:b;}
-ll max(ll a,int b){return a>b?a:b;}
-ll max(int a,ll b){return a>b?a:b;}
-ll gcd(ll a,ll b){return b==0?a:gcd(b,a%b);}
-ll lcm(ll a,ll b){return a/gcd(a,b)*b;}
-ll power(ll a,ll b,ll mod=MOD){ll res=1;a%=mod;while(b>0){if(b&1)res=res*a%mod;a=a*a%mod;b>>=1;}return res;}
-ll modinv(ll a,ll mod=MOD){return power(a,mod-2,mod);}
-string to_upper(string a){for(int i=0;i<(int)a.size();++i)if(a[i]>='a'&&a[i]<='z')a[i]-='a'-'A';return a;}
-string to_lower(string a){for(int i=0;i<(int)a.size();++i)if(a[i]>='A'&&a[i]<='Z')a[i]+='a'-'A';return a;}
-bool prime(ll a){if(a<=1)return 0;for(ll i=2;i*i<=a;++i)if(a%i==0)return 0;return 1;}
-void yes(){cout<<"YES\n";}
-void no(){cout<<"NO\n";}
-/* SIEVE — sieve[i]=1 prime, 0 not prime */
-vector<ll> sieve(ll n){vector<ll>s(n+1,1);s[0]=s[1]=0;for(ll i=2;i*i<=n;i++)if(s[i])for(ll j=i*i;j<=n;j+=i)s[j]=0;return s;}
-/* DSU */
-struct DSU{
-    vector<int>p,rank_;
-    DSU(int n):p(n),rank_(n,0){iota(p.begin(),p.end(),0);}
-    int find(int x){return p[x]==x?x:p[x]=find(p[x]);}
-    bool unite(int a,int b){a=find(a);b=find(b);if(a==b)return 0;if(rank_[a]<rank_[b])swap(a,b);p[b]=a;if(rank_[a]==rank_[b])rank_[a]++;return 1;}
-    bool same(int a,int b){return find(a)==find(b);}
-};
-/* GRAPH */
-vector<vector<int>>adj;
-void addEdge(int u,int v){adj[u].pb(v);adj[v].pb(u);}
-vi bfs(int src,int n){vi dist(n,-1);queue<int>q;dist[src]=0;q.push(src);while(!q.empty()){int u=q.front();q.pop();trav(v,adj[u])if(dist[v]==-1){dist[v]=dist[u]+1;q.push(v);}}return dist;}
-/* COMBINATORICS */
-const int MAXN=2e6+5;
-ll fact[MAXN],inv_fact[MAXN];
-void precompute(){fact[0]=1;cf(i,1,MAXN-1)fact[i]=fact[i-1]*i%MOD;inv_fact[MAXN-1]=modinv(fact[MAXN-1]);rf(i,MAXN-1,0)inv_fact[i]=inv_fact[i+1]*(i+1)%MOD;}
-ll C(ll n,ll r){if(r<0||r>n)return 0;return fact[n]%MOD*inv_fact[r]%MOD*inv_fact[n-r]%MOD;}
-/* TYPEDEFS */
-typedef long int int32;
-typedef unsigned long int uint32;
-typedef long long int int64;
-typedef unsigned long long int uint64;
-/* clang-format on */
-/*
- * OBS:
- * 
- * APR:
- * 
- */
-ll dp[100002];
-void solve(){
-    ll n;cin>>n;
-    vector<ll>a(n),cnt(100002);
-    for(int i=0;i<n;i++){
-        cin >> a[i];    
-        cnt[a[i]]++;
-    }   
-    dp[0]=0,dp[1]=cnt[1];
-    for(ll i=2;i<=100000;i++){
-        dp[i] = max(dp[i-1] , cnt[i]*1LL*i+dp[i-2]);
-    }
-    cout<<dp[100000]<<endl;
+#define ff first
+#define ss second
+#define rep(i, a, b) for (int i = (a); i < (b); ++i)
+#define per(i, a, b) for (int i = (b) - 1; i >= (a); --i)
+#define each(x, v) for (auto &x : v)
+// ---------- Constants ----------
+constexpr int MOD = 1'000'000'007;
+constexpr int MOD2 = 998'244'353;
+constexpr ll INF = 4e18;
+constexpr int INFI = 2e9;
+constexpr ld EPS = 1e-9;
+const ld PI = acosl(-1.0L);
+// 4-direction and 8-direction moves
+constexpr int dx4[] = {0, 1, 0, -1};
+constexpr int dy4[] = {1, 0, -1, 0};
+constexpr int dx8[] = {0, 1, 1, 1, 0, -1, -1, -1};
+constexpr int dy8[] = {1, 1, 0, -1, -1, -1, 0, 1};
+// ---------- Utilities ----------
+template <class T> bool chmin(T &a, const T &b) { return b < a ? a = b, true : false; }
+template <class T> bool chmax(T &a, const T &b) { return a < b ? a = b, true : false; }
+// Fast RNG (hack-resistant seed)
+mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
+ll rnd(ll l, ll r) { return uniform_int_distribution<ll>(l, r)(rng); }
+// Modular arithmetic
+ll power(ll b, ll e, ll m = MOD) {
+    ll r = 1; b %= m;
+    for (; e > 0; e >>= 1, b = b * b % m)
+        if (e & 1) r = r * b % m;
+    return r;
 }
-int main(){
+ll inv(ll a, ll m = MOD) { return power(a, m - 2, m); }  // m must be prime
+ll add(ll a, ll b, ll m = MOD) { return ((a + b) % m + m) % m; }
+ll mul(ll a, ll b, ll m = MOD) { return (a % m) * (b % m) % m; }
+// ---------- Input / Output helpers ----------
+template <class T> istream &operator>>(istream &in, vector<T> &v) {
+    for (auto &x : v) in >> x;
+    return in;
+}
+template <class A, class B> istream &operator>>(istream &in, pair<A, B> &p) { return in >> p.first >> p.second; }
+template <class T> ostream &operator<<(ostream &out, const vector<T> &v) {
+    for (int i = 0; i < sz(v); ++i) out << v[i] << (i + 1 < sz(v) ? " " : "");
+    return out;
+}
+template <class A, class B> ostream &operator<<(ostream &out, const pair<A, B> &p) { return out << p.first << ' ' << p.second; }
+inline void YES() { cout << "YES\n"; }
+inline void NO() { cout << "NO\n"; }
+inline void yes() { cout << "Yes\n"; }
+inline void no() { cout << "No\n"; }
+// ---------- Debugging (compiled out on judge unless -DLOCAL) ----------
+#ifdef LOCAL
+template <class T> void _print(const T &x) { cerr << x; }
+template <class T> void _print(const vector<T> &v) {
+    cerr << "[";
+    for (int i = 0; i < sz(v); ++i) { if (i) cerr << ", "; _print(v[i]); }
+    cerr << "]";
+}
+template <class A, class B> void _print(const pair<A, B> &p) { cerr << "("; _print(p.first); cerr << ", "; _print(p.second); cerr << ")"; }
+void _dbg() { cerr << "]\n"; }
+template <class H, class... T> void _dbg(const H &h, const T &...t) {
+    _print(h);
+    if (sizeof...(t)) cerr << ", ";
+    _dbg(t...);
+}
+#define dbg(...) cerr << "[" << #__VA_ARGS__ << "] = [", _dbg(__VA_ARGS__)
+#else
+#define dbg(...)
+#endif
+// ---------- Solution ----------
+/*
+Observation:
+
+
+Approach:
+
+
+*/
+int hi=100001;
+vector<ll>freq(hi,0),dp(hi,0),a(hi);
+void solve() {
+    int n;
+    cin>>n;
+    for(int i = 0 ; i < n ; i++){
+        cin>>a[i];
+        freq[a[i]]++;
+    }
+    dp[1]=freq[1];
+    for(int i = 2 ; i < hi ; i++){
+        dp[i]=max(dp[i-1],(freq[i]*i)+dp[i-2]);
+    }
+    cout<<dp[hi-1]<<endl;
+}
+int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    // int tc;
-    // cin>>tc;
-    // while(tc--)solve();
-    solve();
+#ifdef LOCAL
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    auto start = chrono::steady_clock::now();
+#endif
+    int t = 1;
+    //cin >> t;  // comment out for single-test problems
+    while (t--) solve();
+#ifdef LOCAL
+    auto stop = chrono::steady_clock::now();
+    cerr << "Time: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << " ms\n";
+#endif
     return 0;
 }

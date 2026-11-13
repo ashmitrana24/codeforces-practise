@@ -103,8 +103,20 @@ void solve() {
     int n;cin>>n;
     vector<int>a(n);
     for(auto &i:a) cin>>i;
-    
-    
+    bool ok1=true,ok2=true;
+    for(int i = 2 ; i < n ; i+=2){
+        if(a[i]%2!=a[0]%2){
+            ok1=false;
+            break;
+        }
+    }
+    for(int i = 1 ; i < n ; i+=2){
+        if(a[i]%2!=a[1]%2){
+            ok2=false;
+            break;
+        }
+    }
+    cout<<(ok1&&ok2?"YES":"NO")<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);

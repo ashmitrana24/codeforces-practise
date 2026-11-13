@@ -91,7 +91,7 @@ map<pair<ll,ll>,ll>dp;
 ll rec(ll a,ll b,ll x){
     if(a>b) swap(a,b);
     if(a==b) return 0;
-     if(dp.count({a,b})) return dp[{a,b}];
+    if(dp.count({a,b})) return dp[{a,b}];
     ll ans=b-a;
     if(b<x){
         ans=min(ans,1+rec(0,a,x));
