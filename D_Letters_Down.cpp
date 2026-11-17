@@ -103,18 +103,13 @@ Approach:
 void solve() {
     int n; cin>>n;
     string s; cin>>s;
-    int cnt=0;
     vector<bool>a(26,false);
-    for(int i = 0 ; i < n/2 ; i++){
-        int l=s[i]-'a';
-        int r=s[n-1-i]-'a';
-        if(l==r) continue;
-        for(int x = min(l,r)+1 ; x <= max(l,r) ; x++){
-            a[x]=true;
-        }
+    for(int i = 0 ; i < n ; i++){
+        char l=min(s[i],s[n-1-i]);
+        char r=max(s[i],s[n-1-i]);
+        for(char c = l+1 ; c <= r ; c++) a[c-'a']=true;
     }
-    for(int i = 0 ; i < 26 ; i++) cnt+=a[i];
-    cout<<cnt<<endl;
+    cout<<count(all(a),true)<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);
