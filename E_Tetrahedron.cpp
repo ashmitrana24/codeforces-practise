@@ -101,25 +101,17 @@ Approach:
  
 */
 const int N=1e9+7;
-int n;
 void solve() {
+    int n;
     cin>>n;
-    vector<vector<int>>dp(5,vector<int>(n+1,0));
-    for(int i = 1 ; i <= 4 ; i++){
-        if(i==4){
-            dp[i][0]=1;
-        }
-        else dp[i][0]=0;
+    ll dp[2][n+1];
+    dp[1][0]=1;
+    dp[0][0]=0;
+    for(int j = 1 ; j <= n ; j++){
+        dp[1][j]=(3*dp[0][j-1])%N;
+        dp[0][j]=(dp[1][j-1]+2*dp[0][j-1])%N;
     }
-    for(int i = 1 ; i <= n ; i++){
-        for(int j = 1 ; j <= 4 ; j++){
-            for(int k = 1 ; k <= 4 ; k++){
-                if(j==k) continue;
-                dp[j][i]=(dp[j][i]+dp[k][i-1])%N;
-            }
-        }
-    }
-    cout<<dp[4][n]<<endl; 
+    cout<<dp[1][n]<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);
