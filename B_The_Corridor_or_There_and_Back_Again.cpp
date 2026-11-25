@@ -102,13 +102,15 @@ Approach:
 */
 void solve() {
     int n; cin>>n;
-    vector<pair<int,int>>a;
+    int ans=INT_MAX;
     for(int i = 0 ; i < n ; i++){
         int d,s; cin>>d>>s;
-        a.push_back({d,s});
+        int dis=0;
+        if(s%2==0) dis=(d+((s/2)-1));
+        else dis=(d+(s/2));
+        ans=min(ans,dis);
     }
-    
-    
+    cout<<ans<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);
