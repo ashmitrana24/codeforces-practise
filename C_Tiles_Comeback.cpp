@@ -179,11 +179,10 @@ void solve() {
             if(cnt_t1==k){
                 if(fr[a[n-1]]<k){
                     cout<<"NO"<<endl;
-                }
-                else{
-                    cout<<"YES"<<endl;
                     return;
                 }
+                cout<<"YES"<<endl;
+                return;
             }
         }
     }  
